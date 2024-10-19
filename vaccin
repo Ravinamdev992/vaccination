@@ -1,0 +1,63 @@
+package vac;
+
+//Abstract class Vaccine
+abstract class Vaccine {
+ int age;
+ String nationality;
+
+ // Constructor to initialize variables
+ public Vaccine(int age, String nationality) {
+     this.age = age;
+     this.nationality = nationality;
+ }
+
+ // Concrete method firstDose()
+ public void firstDose() {
+     if (age >= 18 && nationality.equalsIgnoreCase("Indian")) {
+         System.out.println("First dose administered. Please pay Rs. 250.");
+     } else {
+         System.out.println("You are not eligible for the first dose.");
+     }
+ }
+
+ // Concrete method secondDose()
+ public void secondDose() {
+     if (hasFirstDose()) {
+         System.out.println("Second dose administered.");
+     } else {
+         System.out.println("You need to take the first dose before taking the second dose.");
+     }
+ }
+
+ // Abstract method boosterDose()
+ public abstract void boosterDose();
+
+ // Method to check if the user has taken the first dose
+ protected boolean hasFirstDose() {
+     // Assume the user has taken the first dose for simplicity
+     return true;
+ }
+}
+
+//Implementation class VaccinationSuccessful
+class VaccinationSuccessful extends Vaccine {
+ public VaccinationSuccessful(int age, String nationality) {
+     super(age, nationality);
+ }
+
+ // Implementation of abstract method boosterDose()
+ public void boosterDose() {
+     System.out.println("Booster dose administered.");
+ }
+}
+
+//Main class Vaccination
+public class Vaccination {
+ public static void main(String[] args) {
+     Vaccine vaccine = new VaccinationSuccessful(25, "Indian");
+
+     vaccine.firstDose();
+     vaccine.secondDose();
+     vaccine.boosterDose();
+ }
+}
